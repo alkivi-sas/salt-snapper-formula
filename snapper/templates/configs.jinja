@@ -1,0 +1,49 @@
+# subvolume to snapshot
+SUBVOLUME="{{ config.get('subvolume') }}"
+
+# filesystem type
+FSTYPE="{{ config.get('fstype', 'btrfs') }}"
+
+
+# users and groups allowed to work with config
+ALLOW_USERS="{{ config.get('allow_users', '') }}"
+ALLOW_GROUPS="{{ config.get('allow_groups', '') }}"
+
+# sync users and groups from ALLOW_USERS and ALLOW_GROUPS to .snapshots
+# directory
+SYNC_ACL="{{ config.get('sync_acl', 'no') }}"
+
+
+# start comparing pre- and post-snapshot in background after creating
+# post-snapshot
+BACKGROUND_COMPARISON="{{ config.get('background_comparison', 'yes') }}"
+
+
+# run daily number cleanup
+NUMBER_CLEANUP="{{ config.get('number_cleanup', 'yes') }}"
+
+# limit for number cleanup
+NUMBER_MIN_AGE="{{ config.get('number_min_age', 1800) }}"
+NUMBER_LIMIT="{{ config.get('number_limit', 50) }}"
+NUMBER_LIMIT_IMPORTANT="{{ config.get('number_limit_important', 10) }}"
+
+
+# create hourly snapshots
+TIMELINE_CREATE="{{ config.get('timeline_create', 'yes') }}"
+
+# cleanup hourly snapshots after some time
+TIMELINE_CLEANUP="{{ config.get('timeline_cleanup', 'yes') }}"
+
+# limits for timeline cleanup
+TIMELINE_MIN_AGE="{{ config.get('timeline_min_age', 1800) }}"
+TIMELINE_LIMIT_HOURLY="{{ config.get('timeline_limit_hourly', 10) }}"
+TIMELINE_LIMIT_DAILY="{{ config.get('timeline_limit_daily', 5) }}"
+TIMELINE_LIMIT_MONTHLY="{{ config.get('timeline_limit_monthly', 2) }}"
+TIMELINE_LIMIT_YEARLY="{{ config.get('timeline_limit_yearly', 1) }}"
+
+
+# cleanup empty pre-post-pairs
+EMPTY_PRE_POST_CLEANUP="{{ config.get('empty_pre_post_cleanup', no) }}"
+
+# limits for empty pre-post-pair cleanup
+EMPTY_PRE_POST_MIN_AGE="{{ config.get('empty_pre_post_min_age', 1800) }}"
