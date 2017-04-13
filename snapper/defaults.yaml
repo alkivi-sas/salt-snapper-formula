@@ -1,7 +1,16 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
-template:
-  pkg: template
-  config: '/etc/template'
-  service:
-    name: template
+snapper:
+  pkg: snapper
+  cron: 
+    script: /root/snapper.sh
+    minute: '*/30'
+    hour: '*'
+    daymonth: '*'
+    month: '*'
+    dayweek: '*'
+  configs_dir: /etc/snapper/configs
+  filters_dir: /etc/snapper/filters
+  default: /etc/default/snapper
+  configs: {}
+  

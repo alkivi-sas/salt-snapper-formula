@@ -1,3 +1,5 @@
+# This file is managed by Salt. DO NOT EDIT
+
 # subvolume to snapshot
 SUBVOLUME="{{ config.get('subvolume') }}"
 
@@ -43,7 +45,7 @@ TIMELINE_LIMIT_YEARLY="{{ config.get('timeline_limit_yearly', 1) }}"
 
 
 # cleanup empty pre-post-pairs
-EMPTY_PRE_POST_CLEANUP="{{ config.get('empty_pre_post_cleanup', no) }}"
+EMPTY_PRE_POST_CLEANUP="{{ config.get('empty_pre_post_cleanup', 'no') }}"
 
 # limits for empty pre-post-pair cleanup
 EMPTY_PRE_POST_MIN_AGE="{{ config.get('empty_pre_post_min_age', 1800) }}"

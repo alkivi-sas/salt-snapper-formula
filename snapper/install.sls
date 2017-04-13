@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{% from "template/map.jinja" import template with context %}
+{% from "snapper/map.jinja" import snapper with context %}
 
-template-pkg:
+snapper-pkg:
   pkg.installed:
-    - name: {{ template.pkg }}
+    - name: {{ snapper.pkg }}

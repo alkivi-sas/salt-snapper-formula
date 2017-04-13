@@ -1,12 +1,59 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{% from "template/map.jinja" import template with context %}
+{% from "snapper/map.jinja" import snapper with context %}
 
-template-config:
+{{ snapper.configs_dir }}:
+  file.directory:
+    - mode: 755
+    - user: root
+    - group: root
+    - makedirs: True
+
+{{ snapper.filters_dir }}:
+  file.directory:
+    - mode: 755
+    - user: root
+    - group: root
+    - makedirs: True
+
+
+{% for config_name, config_data in snapper.configs.items() %}
+{{ snapper.configs_dir }}/{{ config_name }}:
   file.managed:
-    - name: {{ template.config }}
-    - source: salt://template/files/example.tmpl
+    - source: salt://snapper/templates/config.jinja
+    - template: jinja
+    - mode: 640
+    - user: root
+    - group: root
+    - context:
+      config: {{ config_data }}
+    - require:
+      - file: {{ snapper.configs_dir }}
+{% endfor %}
+
+{{ snapper.default }}:
+  file.managed:
+    - source: salt://snapper/templates/default.jinja
+    - template: jinja
     - mode: 644
     - user: root
     - group: root
+
+{{ snapper.cron.script }}:
+  file.managed:
+    - source: salt://snapper/files/cron.sh
+    - user: root
+    - group: root
+    - mode: 755
+
+snapper-cron:
+  cron.present:
+    - name: {{ snapper.cron.script }}
+    - identifier: Snapper Automatic Script
+    - user: root
+    - minute: '{{ snapper.cron.minute }}'
+    - hour: '{{ snapper.cron.hour }}'
+    - daymonth: '{{ snapper.cron.daymonth }}'
+    - month: '{{ snapper.cron.month }}'
+    - dayweek: '{{ snapper.cron.dayweek }}'

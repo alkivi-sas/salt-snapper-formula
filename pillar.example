@@ -1,3 +1,26 @@
-template:
+snapper:
   lookup:
-    master: template-master
+    pkg: snapper-master
+  configs:
+    home:
+      subvolume: /home
+    toto:
+      subvolume: /home/toto
+      fstype: btrfs
+      allow_users: ''
+      allow_groups: ''
+      sync_acl: no
+      background_comparison: yes
+      number_cleanup: yes
+      number_min_age: 1800
+      number_limit: 50
+      number_limit_important: 10
+      timeline_create: yes
+      timeline_cleanup: yes
+      timeline_min_age: 1800
+      timeline_limit_hourly: 10
+      timeline_limit_daily: 5
+      timeline_limit_monthly: 2
+      timeline_limit_yearly: 1
+      empty_pre_post_cleanup: no
+      empty_pre_post_min_age: 1800
