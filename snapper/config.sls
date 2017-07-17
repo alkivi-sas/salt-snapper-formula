@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
+include:
+  - snapper
 
 {% from "snapper/map.jinja" import snapper with context %}
 
@@ -19,6 +21,14 @@
 
 
 {% for config_name, config_data in snapper.configs.items() %}
+init_{{ config_name }}:
+  cmd.run:
+    - name: snapper -c {{ config_name }} create-config {{ config_data.get('subvolume') }}
+    - creates: {{ snapper.configs_dir }}/{{ config_name }}
+    - require:
+      - file: {{ snapper.configs_dir }}
+      - pkg: snapper-pkg
+
 {{ snapper.configs_dir }}/{{ config_name }}:
   file.managed:
     - source: salt://snapper/templates/config.jinja

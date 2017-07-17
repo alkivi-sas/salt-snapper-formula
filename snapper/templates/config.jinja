@@ -7,6 +7,14 @@ SUBVOLUME="{{ config.get('subvolume') }}"
 FSTYPE="{{ config.get('fstype', 'btrfs') }}"
 
 
+# btrfs qgroup for space aware cleanup algorithms
+QGROUP=""
+
+
+# fraction of the filesystems space the snapshots may use
+SPACE_LIMIT="{{config.get('space_limit', 0.5) }}"
+
+
 # users and groups allowed to work with config
 ALLOW_USERS="{{ config.get('allow_users', '') }}"
 ALLOW_GROUPS="{{ config.get('allow_groups', '') }}"
